@@ -1,0 +1,92 @@
+-- Passo 1: Criar o Banco de Dados
+DROP DATABASE IF EXISTS hotelmanagementsystem;
+CREATE DATABASE hotelmanagementsystem;
+USE hotelmanagementsystem;
+
+-- Passo 2: Criar a Tabela `hospedes`
+CREATE TABLE hospedes (
+    idhospede INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(100),
+    email VARCHAR(100)
+);
+
+-- Passo 3: Criar a Tabela `quartos`
+CREATE TABLE quartos (
+    idquarto INT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL
+);
+
+-- Passo 4: Criar a Tabela `reservas`
+CREATE TABLE reservas (
+    idreserva INT AUTO_INCREMENT PRIMARY KEY,
+    idhospede INT,
+    idquarto INT,
+    datacheckin DATE NOT NULL,
+    datacheckout DATE NOT NULL,
+    FOREIGN KEY (idhospede) REFERENCES hospedes(idhospede) ON DELETE CASCADE,
+    FOREIGN KEY (idquarto) REFERENCES quartos(idquarto) ON DELETE CASCADE
+);
+
+-- Passo 5: Inserir Dados Fictícios na Tabela `hospedes`
+INSERT INTO hospedes (nome, telefone, email)
+VALUES 
+('João Silva', '123456789', 'joao.silva@email.com'),
+('Maria Oliveira', '987654321', 'maria.oliveira@email.com'),
+('Carlos Pereira', '555555555', 'carlos.pereira@email.com');
+
+-- Passo 6: Inserir Dados Fictícios na Tabela `quartos`
+INSERT INTO quartos (numero, tipo, preco)
+VALUES 
+(101, 'Single', 150.00),
+(102, 'Double', 200.00),
+(103, 'Suite', 350.00),
+(104, 'Deluxe', 500.00);
+
+-- Passo 7: Inserir Dados Fictícios na Tabela `reservas`
+INSERT INTO reservas (idhospede, idquarto, datacheckin, datacheckout)
+VALUES 
+(1, 2, '2023-10-01', '2023-10-05'),
+(2, 1, '2023-10-03', '2023-10-07'),
+(3, 3, '2023-10-10', '2023-10-15');
+
+-- Passo 8: Consultas
+
+-- 8.1: Exibir todos os hóspedes
+SELECT * FROM hospedes;
+
+-- 8.2: Exibir todos os quartos disponíveis
+SELECT * FROM quartos;
+
+-- 8.3: Exibir reservas com informações de hóspedes e quartos
+SELECT r.idreserva, h.nome, q.numero, r.datacheckin, r.datacheckout
+FROM reservas r
+JOIN hospedes h ON r.idhospede = h.idhospede
+JOIN quartos q ON r.idquarto = q.idquarto;
+
+-- 8.4: Consultar reservas que terminam até uma certa data
+SELECT * FROM reservas WHERE datacheckout <= '2023-10-10';
+
+-- Passo 9: Atualizações
+
+-- 9.1: Atualizar o telefone de um hóspede
+UPDATE hospedes
+SET telefone = '1122334455'
+WHERE idhospede = 1;
+
+-- 9.2: Atualizar o preço de um quarto
+UPDATE quartos
+SET preco = 220.00
+WHERE idquarto = 2;
+
+-- Passo 10: Exclusões
+
+-- 10.1: Excluir uma reserva
+DELETE FROM reservas
+WHERE idreserva = 1;
+
+-- 10.2: Excluir um hóspede
+DELETE FROM hospedes
+WHERE idhospede = 3;
