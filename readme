@@ -1,0 +1,24 @@
+# Sistema de Gerenciamento de Hotel
+
+Este projeto é um sistema simples de gerenciamento de hotel, permitindo o cadastro e controle de hóspedes, quartos e reservas. O sistema utiliza um banco de dados MySQL para armazenar as informações.
+
+## Funcionalidades
+
+- **Gerenciamento de Hóspedes**: Cadastro, atualização e remoção de hóspedes.
+- **Gerenciamento de Quartos**: Cadastro e atualização de informações dos quartos disponíveis.
+- **Gerenciamento de Reservas**: Criação, atualização e exclusão de reservas, além de consultas sobre reservas.
+
+## Estrutura do Banco de Dados
+
+O banco de dados `hotelmanagementsystem` possui as seguintes tabelas:
+
+1. **hospedes**: Armazena informações dos hóspedes.
+2. **quartos**: Armazena informações dos quartos, incluindo número, tipo e preço.
+3. **reservas**: Armazena informações sobre reservas, incluindo referências a hóspedes e quartos.
+
+## Como Configurar
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/usuario/repositorio.git
