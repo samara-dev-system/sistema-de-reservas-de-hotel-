@@ -1,0 +1,16 @@
+
+### .gitignore
+
+```gitignore
+# Ignore arquivos de configuração do MySQL
+*.sql
+
+# Ignore arquivos de log
+*.log
+
+# Ignore arquivos temporários
+*.tmp
+*.temp
+
+# Ignore diretórios de cache
+.cache/
